@@ -1,4 +1,5 @@
 name,tag,year,path,description
 QEC autofiller,python,2026,python/qec-automated.py,Automatically fills QEC feedback form in three clicks using python
 nyxtudes index,hidden,2026,python/nyxtudes.py,Generate index for README using this csv (norvig/pytudes)
-testing stuff,test,2024,notebooks/test.py,Dummy test file to test some stuff 😊 (source: marimo tutorial ui)
+testing marimo,marimo,2024,notebooks/test.py,Dummy test file to test some stuff 😊 (source: marimo tutorial ui)
+testing manim,manim,2024,python/jeertmans.py,Dummy test file to test some stuff 😊 (source: https://eertmans.be/posts/emts2025/)

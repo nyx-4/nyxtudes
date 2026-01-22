@@ -1,0 +1,15 @@
+tag,group,description
+wip,hidden,work-in-progress
+test,hidden,files to test prod
+pytest,hidden,pytest files
+hidden,hidden,not-good-enough ( or supportive )
+puzzle,marimo,mildly interesting puzzle
+math,marimo,math-related topic not covered by more specific tag
+aoc,marimo,advent-of-code
+euler,marimo,projecteuler
+marimo,marimo,misc. marimo notebooks that do not fit in other tags
+linalg,manim,animations for linear algebra
+calculus,manim,animations for calculus
+embed,manim,(hidden) animations embedded (iframe'd) in other notebooks
+manim,manim,misc. manim animations that do not fit in other tags
+python,python,misc. python scripts that do not fit in other tags
