@@ -29,11 +29,18 @@ I hope this collection can help.
 
 For each notebook you can hover on the title to see a description, or click the title to view raw on github,
 or click one of the letters in the left column to launch the notebook on
-[**W**ASM Marimo](https://marimo.app/),
-[**A**pp](https://ny-x4.github.io/nyxtudes/),
-[**P**ages](https://ny-x4.github.io/nyxtudes/),
-[**M**olab](https://molab.marimo.io/), or
-[**C**loudflare](https://nyx-4.workers.dev). <!-- dash.cloudflare.com -->
+
+|       | hosted-by                                                    | Code     | Server or WASM |
+| ----- | ------------------------------------------------------------ | -------- | -------------- |
+| **W** | [**W**ASM Marimo](https://marimo.app/)                       | Editable | WASM           |
+| **A** | [**A**pp (gh-pages)](https://ny-x4.github.io/nyxtudes/)      | Hidden   | WASM           |
+| **N** | [**N**otebook (gh-pages)](https://ny-x4.github.io/nyxtudes/) | Editable | WASM           |
+| **M** | [**M**olab Marimo](https://molab.marimo.io/)                 | Editable | Marimo Server  |
+| **C** | [**C**loudflare (App)](https://nyx-4.workers.dev)            | Hidden   | WASM           |
+| **F** | [Cloud**f**lare (Notebook)](https://nyx-4.workers.dev)       | Editable | WASM           |
+
+
+ <!-- https://marimo.app/github.com/nyx-4/nyxtudes/blob/main/notebooks/test.py -->
 
 <!-- start index -->
 
@@ -47,5 +54,5 @@ by [Peter Norvig](https://norvig.com/)
 that was very influential to me when I was first learning to program. I still have my copy.
 
 <a href="https://pn.smugmug.com/Family/Peter-Norvig/i-xj9CHN9/A">
-    <img src="https://photos.smugmug.com/Family/Peter-Norvig/i-xj9CHN9/2/LntrLddCdDFBK93Q3LTXL3FXcMV4ZGGsBQ58znv2W/XL/Peter%20Norvig-XL.jpg" alt="">
+    <img src="https://photos.smugmug.com/Family/Peter-Norvig/i-xj9CHN9/2/LntrLddCdDFBK93Q3LTXL3FXcMV4ZGGsBQ58znv2W/XL/Peter%20Norvig-XL.jpg" alt="" width="50%">
 </a>
