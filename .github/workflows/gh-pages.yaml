@@ -16,3 +16,5 @@ jobs:
     steps:
       - name: dispatch repository to ny-x4/nyxtudes via gh-workflow
         run:  gh workflow run --repo ny-x4/nyxtudes 'deploy.yml'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
