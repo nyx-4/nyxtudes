@@ -37,7 +37,7 @@ class Groups(TypedDict):
 
 
 def get_metadata() -> Groups:
-    df = polars.read_csv(".github/metadata.csv").group_by("tag")
+    df = polars.read_csv(".github/scripts/metadata.csv")
     desc: dict[Tag, Description] = get_description()
     metadata: Groups = {
         "marimo": {},
@@ -46,7 +46,8 @@ def get_metadata() -> Groups:
         "hidden": {},
     }
 
-    for (tag, *_), content in df:
+    # get tag and content from a dict-like df, grouped by tag.
+    for (tag, *_), content in df.group_by("tag", maintain_order=True):
         group = desc[tag]["group"]  # get 'group' of tag
 
         def f_mode1(path: str) -> str:  # app for marimo, light for manim
@@ -81,5 +82,5 @@ def get_metadata() -> Groups:
 
 
 def get_description() -> dict[Tag, Description]:
-    df: polars.DataFrame = polars.read_csv(".github/tags.csv")
+    df: polars.DataFrame = polars.read_csv(".github/scripts/tags.csv")
     return df.rows_by_key("tag", named=True, unique=True)

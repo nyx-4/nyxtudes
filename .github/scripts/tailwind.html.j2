@@ -18,11 +18,13 @@
 
     <main>
       {% if m_marimo %}
-        {% for key in sorted(m_marimo) %}
+      <h1 class="text-xl font-bold my-4">Marimo:</h1>
+      <p>Reactive notebook experience for Python</p>
+        {% for key, notebooks in m_marimo.items() %}
         <h2 class="text-xl font-bold text-center my-4">{{ key }}</h2>
         <p class="text-center mb-4">{{ description[key]['description'] }}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {% for notebook in m_marimo[key] %}
+          {% for notebook in notebooks %}
           <!-- {{ notebook.name }} Notebook -->
           <div class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
           <div class="bg-gray-200 p-3 font-semibold">{{ notebook.name }}</div>
@@ -38,6 +40,8 @@
       {% endif %}
 
       {% if m_manim %}
+      <h1 class="text-xl font-bold my-4">Manim:</h1>
+      <p>Animation engine for explanatory math videos</p>
         {% for key, manims in m_manim.items() %}
         <h2 class="text-xl font-bold text-center my-4">{{ key }}</h2>
         <p class="text-center mb-4">{{ description[key]['description'] }}</p>

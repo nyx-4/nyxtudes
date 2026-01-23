@@ -1,7 +1,3 @@
-"""
-modified from https://github.com/marimo-team/marimo-gh-pages-template/blob/main/.github/scripts/build.py
-"""
-
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
@@ -12,10 +8,13 @@ modified from https://github.com/marimo-team/marimo-gh-pages-template/blob/main/
 # ]
 # ///
 
+# modified from https://github.com/marimo-team/marimo-gh-pages-template/blob/main/.github/scripts/build.py
+
 import subprocess
 import jinja2
 import typer
 from pathlib import Path
+from shutil import copytree
 from loguru import logger
 from pprint import pp as pprint
 
@@ -25,7 +24,7 @@ from metadata import get_description, get_metadata
 
 def log_and_run(cmd: list[str]) -> None:
     logger.info(f"Running cmd: {cmd}")
-    subprocess.run(cmd, capture_output=True, text=True, check=True)
+    subprocess.run(cmd, text=True, check=True)
 
 
 def export_marimo(marimo_data: dict[Tag, Records], output_dir: Path) -> None:
@@ -56,13 +55,19 @@ def export_manim(manim_data: dict[Tag, Records], output_dir: Path) -> None:
     def render_cmd(record: CSVRecord, mode: str) -> list[str]:
         return f"uv run manim-slides render {record['path']}".split()
 
-    def convert_light_cmd(record: CSVRecord, mode: str) -> list[str]:
-        return f"uv run manim-slides convert {config} -ctitle={record['name']} {Path(record['path']).stem} _site/{record['mode1']}".split()
+    def convert_cmd(record: CSVRecord, mode: str) -> list[str]:
+        mode = "mode1" if mode == "light" else "mode2"
 
-    def convert_dark_cmd(record: CSVRecord, mode: str) -> list[str]:
-        return f"uv run manim-slides convert {config} -ctitle={record['name']} {Path(record['path']).stem} _site/{record['mode2']}".split()
+        config: list[str] = [
+            "--offline",
+            "-ccontrols=true",
+            "-cprogress=true",
+            f"-ctitle={record['name']}",
+            Path(record["path"]).stem,
+            f"_site/{record[mode]}",
+        ]
 
-    config: str = "--offline -ccontrols=true -cprogress=true"
+        return "uv run manim-slides convert".split() + config
 
     for tag, records in manim_data.items():
         for record in records:
@@ -71,10 +76,10 @@ def export_manim(manim_data: dict[Tag, Records], output_dir: Path) -> None:
                 log_and_run(render_cmd(record, mode="run"))
 
                 logger.info(f"Exporting {record['name']} to {record['mode1']} (light)")
-                log_and_run(convert_light_cmd(record, mode="run"))
+                log_and_run(convert_cmd(record, mode="light"))
 
                 logger.info(f"Exporting {record['name']} to {record['mode2']} (dark)")
-                log_and_run(convert_dark_cmd(record, mode="edit"))
+                log_and_run(convert_cmd(record, mode="dark"))
 
                 logger.info(f"Successfully exported {record['path']}")
 
@@ -117,6 +122,10 @@ def generate_index(
             description=description,
         )
         (output_dir / "index.html").write_text(rendered_html)
+
+        copytree(Path.cwd() / "images", output_dir / "images")
+        copytree(Path.cwd() / "slides", output_dir / "slides")
+        open(output_dir / ".nojekyll", "w").close()  # touch .nojekyll
 
         logger.info(f"Successfully generated index.html at {output_dir / 'index.html'}")
 
